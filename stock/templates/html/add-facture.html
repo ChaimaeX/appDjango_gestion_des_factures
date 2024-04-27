@@ -1,0 +1,213 @@
+{% extends "html/login.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br>
+<script src="{% static 'js/about.js' %}"></script>
+<h1 class="text-capitalize text-center mx-10 bg-dark text-white"> Register a new invoice </h1>
+
+<form method="post">
+
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="client"> Client </label>
+            <input required name="client" type="text" class="form-control" id="client-1">
+            <!-- <select name="client" class="form-control" id="client">
+                <option> Choose the customer ... </option>
+                {% for customer in customers %}
+                <option value="{{customer.id}}">{{forloop.counter}}-{{customer.name}}</option>
+                {% endfor %}
+            </select> -->
+        </div>
+    </div>
+
+    <!-- <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="invoice"> Invoice Type </label>
+            <select name="invoice_type" class="form-control" id="invoice">
+                <option> Choose the invoice type ... </option>
+                <option value="R">RECEIPT</option>
+                <option value="P">PROFORMA INVOICE</option>
+                <option value="I">INVOICE</option>
+            </select>
+        </div>
+    </div> -->
+
+    <div id="wrapper">
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="produit-1">#1 Item name </label>
+                <!-- <input required name="article" type="text" class="form-control" id="article-1"> -->
+                 <select name="produit" class="form-control" id="produit">
+                <option> Choose a product ... </option>
+                {% for produit in produits %}
+                <option value="{{produit.id}}"  onkeyup="getTotal(this.id)" >{{forloop.counter}}-{{produit.name}}</option>
+                {% endfor %}
+            </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="qty-1"> Quantity </label>
+                <input required name="qty" type="number" min="1" step="0.1"  onkeyup="getTotal(this.id)" class="form-control" id="qty-1">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="unit-1"> Unit Price </label>
+                <input required name="unit" type="number" min="1" step="0.1"  onkeyup="getTotal(this.id)" class="form-control" id="unit-1">
+               
+            </div>
+
+           
+            <div class="form-group col-md-3">
+                <label for="total-a-1"> Total </label>
+                <input required name="total-a" type="number" min="1" step="0.1" readonly class="form-control"
+                    id="total-a-1">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="total"> Total </label>
+            <input  type="number" value="0" step="0.1" name="total" readonly class="form-control" id="total">
+        </div>
+    </div>
+    <!-- <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="comment"> Comments </label>
+            <textarea class="form-control" name="comment" id="comment"cols="30" rows="1"></textarea>
+        </div>
+    </div> -->
+    <div class="form-check">
+        <input class="form-check-input" name="paid" type="checkbox" value="True" id="defaultCheck1">
+        <label class="form-check-label" for="defaultCheck1">
+          Paid
+        </label>
+      </div>
+     <br><br><br>
+    <button type="submit" class="btn btn-primary" > Save </button>
+
+</form>
+
+<br><br>
+
+<div class="row">
+
+    <button id="btn-add" onclick="Add()" class="btn btn-outline-danger w-50 col-md-6"> Add a new item line </button>
+    <button id="btn-remove" onclick="remove()"  class="btn btn-outline-warning w-50 col-md-6"> Remove last item line </button>
+
+</div>
+
+<br><br><br><br>
+
+
+
+<script type="text/javascript">
+
+    // click to add new line item 
+    // let number =1;
+    // let formAdd =``;
+    Add = function() {
+        console.log('chaimae')
+       
+         let number = $('#wrapper').children().length + 1;
+    
+         formAdd = `
+    
+         <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="produit-1">#${number} Item name </label>
+                <!-- <input required name="article" type="text" class="form-control" id="article-1"> -->
+                 <select name="produit" class="form-control" id="produit">
+                <option> Choose a product ... </option>
+                {% for produit in produits %}
+                 <option value="{{produit.id}}"  onkeyup="getTotal(this.id)"> {{forloop.counter}}-{{produit.name}}</option>
+                {% endfor %}
+            </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="qty-1"> Quantity </label>
+                <input required name="qty" type="number" min="1" step="0.1" onkeyup="getTotal(this.id)"  class="form-control" id="qty-${number}">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="unit-1"> Unit Price </label>
+                <input required name="unit" type="number" min="1" step="0.1" onkeyup="getTotal(this.id)" class="form-control" id="unit-${number}">
+               
+            </div>
+
+           
+            <div class="form-group col-md-3">
+                <label for="total-a-1"> Total </label>
+                <input required name="total-a" type="number" min="1" step="0.1" readonly class="form-control"
+                    id="total-a-${number}">
+            </div>
+
+        </div>
+
+    </div>
+                    `;   
+                    // document.getElementById('more').innerHTML = formAdd;                
+        
+        $("#wrapper:last").append(formAdd);          
+    }
+    // remove last item line
+    remove = function(){
+        let num =  $('#wrapper').children().length  ;
+        console.log(num);
+        let idQty = `#qty-${num}`;
+        let unitId = `#unit-${num}`;
+        // let total = document.getElementById('total');
+        $(`#total`).val(parseFloat($(`#total`).val()) - (parseFloat($(idQty).val()) * parseFloat($(unitId).val())));
+        $("#wrapper").children().last().remove()
+       
+        // console.log(parseFloat($(total).val()));
+
+    }
+    // calculer le total
+   
+    // let price;
+    // let tab = [];
+    function getTotal(id){
+              
+            if ( $('#total').val() == '')
+                     $('#total').val(0);
+               
+               console.log(id.toString().split('-'))
+               let articleId = id.split('-')[1];
+               
+               let idQty = `#qty-${articleId}`;
+
+               let unitId = `#unit-${articleId}`;
+
+               let totalIdLine = `#total-a-${articleId}`;
+
+               let totalLine = parseFloat($(idQty).val()) * parseFloat($(unitId).val());
+
+               $(totalIdLine).val(totalLine);
+               tab[articleId] = totalLine;
+            //    if (cpt == articleId){ 
+            //      result = totalLine;
+                    // cpt++;
+            //    }
+            //    else{ 
+                //   result = totalLine;
+                // $('#total').val(parseFloat($('#total').val()) + totalLine);
+            //    }
+            let sum =0 ;
+            for (i in tab){
+                 sum = sum + tab[i];
+                $('#total').val(sum);
+            }
+    
+}
+
+
+    
+    
+    </script>
+{% endblock content %}

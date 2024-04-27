@@ -1,0 +1,154 @@
+{% extends "html/login.html"%}
+{% load static %}
+{% block content %}
+<style>
+ *{
+margin:0;
+padding:0;
+}
+body{
+background-color: #222;
+color:#fff;
+font-size: system-ui;
+}
+.stock{
+width: 100%;
+margin: auto;
+}
+.head{
+text-align: center;
+text-transform: uppercase;
+margin: 40px , 0;
+padding: 30px;
+}
+input{
+width: 100%;
+height: 30px;
+outline: none;
+border: none;
+background-color: #111;
+margin: 4px 0;
+border-radius: 4px;
+padding: 10px 4px;
+
+color: #fff;
+}
+/* had focus fach ktochi l input ktbdal lon dyalha*/
+input:focus{
+background: #000;
+transform: scale(1.1);
+}
+#prix.input{
+
+display: flex;
+justify-content: space-between;
+}
+#total{
+background-color: red;
+padding: 4px 2px;
+border-radius: 4px;
+
+}
+#total::before{
+content: 'Total: ';
+}
+button{
+width: 100%;
+height: 30px;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+background: #551055;
+transition: 0.5s;
+color: #fff;
+}
+button:hover{
+background: #c944ae;
+letter-spacing: 2px;
+}
+.btnsearch{
+display: flex;
+justify-content: space-between;
+
+}
+.btnsearch button{
+width: 45%;
+}
+table{
+width: 100%;
+text-align: center;
+margin: 10px 0;
+}
+table th{
+text-transform: uppercase;
+}
+th,td{
+padding: 5px;
+}
+#deleteAll{
+margin: 20px 0;
+}
+#telecharger{
+margin: 20px 4px;
+width: auto;
+height: 30px;
+border-radius: 10px;
+text-align: center;
+padding-top: 5px;
+cursor: pointer;
+background-color: red;
+display: none;
+
+}
+a{
+color: #fff;
+text-decoration: none;
+} 
+a:hover{
+color: var(#000);
+}
+
+</style>
+<div class="stock">
+   
+    <div class="head"> <h3>Add Product</h3>
+    </div>
+  
+    <form  method="post">
+     {% csrf_token %}
+    <div class="imputs">
+    
+       <input placeholder="title" required name="title" type="text" id="title">
+       <div id="prix">
+         <input onkeyup="getTotal()" required type="number" name="price" id="price"  placeholder="price">
+         <input onkeyup="getTotal()" required type="number" name="qantite" id="qantite"  placeholder="Qte">
+         <input onkeyup="getTotal()" required type="number" name="total" id="total"  placeholder="total">
+       </div>
+       
+       <input type="text" required placeholder="category" id="category" name="category">
+       <button id="submit" required  >create</button>
+     
+    </div>
+ </form>
+</div> 
+<script>
+    getTotal = function () {
+        
+        let price = '#price';
+        let qte ='#qantite';
+        let total ='#total';
+        if($(price).val() != 0 && $(qte).val() != 0 ){
+        console.log(price,qte);
+        let result = parseFloat($(price).val())*parseFloat($(qte).val())
+        $(total).val(result);
+       
+        }
+        else{
+            $(total).val(0); 
+        }
+    }
+
+   
+</script>
+
+{% endblock content %}
