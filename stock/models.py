@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your models here.
 
 # class Category(models.Model):
@@ -15,9 +16,9 @@ from django.contrib.auth.models import User
 class Facture(models.Model):
     
      client = models.CharField(max_length=132)
-     facture_date_time = models.DateTimeField(null = True , auto_now_add=True)
+     facture_date_time = models.DateTimeField(default=timezone.now)
      save_by = models.ForeignKey(User, on_delete=models.PROTECT )
-     total = models.DecimalField(max_digits=5, decimal_places=2)
+     total = models.DecimalField(max_digits=5, decimal_places=2, default=0) 
      last_update_date = models.DateTimeField(null = True, blank=True)
      paid = models.BooleanField(default=False)
      # comments= models.TextField(null = True , max_length =1000, blank=True )
