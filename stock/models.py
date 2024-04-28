@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 class Facture(models.Model):
     
      client = models.CharField(max_length=132)
-     facture_date_time = models.DateTimeField(auto_now_add=True)
+     facture_date_time = models.DateTimeField(null = True , auto_now_add=True)
      save_by = models.ForeignKey(User , on_delete=models.PROTECT )
      total = models.DecimalField(max_digits=10000, decimal_places=2)
      last_update_date = models.DateTimeField(null = True, blank=True)
