@@ -17,7 +17,7 @@ class Facture(models.Model):
      client = models.CharField(max_length=132)
      facture_date_time = models.DateTimeField(null = True , auto_now_add=True)
      save_by = models.ForeignKey(User, on_delete=models.PROTECT )
-     total = models.IntegerField()
+     total = models.DecimalField(max_digits=10, decimal_places=2)
      last_update_date = models.DateTimeField(null = True, blank=True)
      paid = models.BooleanField(default=False)
      # comments= models.TextField(null = True , max_length =1000, blank=True )
