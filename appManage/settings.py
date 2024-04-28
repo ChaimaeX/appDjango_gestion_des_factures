@@ -31,11 +31,11 @@ try:
 except Exception as e:
     pass
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SEKRET_KEY','#*k)9t8vzu)4j2hr=l@)emxs^ev%6z5)ri$q4g4%nb^n+pr37y') 
+SECRET_KEY = '#*k)9t8vzu)4j2hr=l@)emxs^ev%6z5)ri$q4g4%nb^n+pr37y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG','True') == "True"
 
+DEBUG = os.environ.get('DEBUG', 'True')=="True"
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'samia-solaire.onrender.com']
 
 
@@ -87,9 +87,8 @@ WSGI_APPLICATION = 'appManage.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 if not DEBUG:
     DATABASES = {
-      "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
-    
-    }  
+	"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
    
 else:
     DATABASES = {
