@@ -28,7 +28,10 @@ class Facture(models.Model):
 
      def __str__(self):
          return f"{self.client}"
-    
+     @property
+     def get_totals(self):
+          produits = self.FactureProduct_set.all()
+          total = sum(FactureProduct.produit.get_total for produit in produits)
 
 class Devis(models.Model):
     
