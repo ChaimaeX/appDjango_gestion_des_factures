@@ -18,7 +18,7 @@ class Facture(models.Model):
      client = models.CharField(max_length=132)
      facture_date_time = models.DateTimeField(default=timezone.now)
      save_by = models.ForeignKey(User, on_delete=models.PROTECT )
-     total =  models.DecimalField(max_digits =6 , decimal_places=2)# Exemple avec 10 chiffres au maximum et 2 chiffres après la virgule
+     totalAll =  models.DecimalField(max_digits =6 , decimal_places=2)# Exemple avec 10 chiffres au maximum et 2 chiffres après la virgule
      last_update_date = models.DateTimeField(null = True, blank=True)
      paid = models.BooleanField(default=False)
      # comments= models.TextField(null = True , max_length =1000, blank=True )
