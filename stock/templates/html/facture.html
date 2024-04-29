@@ -47,15 +47,15 @@
                                         <div class="invoice-details">
                                             <address>
                                               Client:  {{obj.client}}<br>
-                                               
+                                              <div>Boufekrane le:  {{obj.facture_date_time}}</div>
                                             </address>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                                         <div class="invoice-details">
                                             <div class="invoice-num">
-                                                <div>-bl N°: #00{{obj.id}}</div>
-                                                <div>Boufekrane le:{{obj.facture_date_time}}</div>
+                                                <div>bl N°: #00{{obj.id}}</div>
+                                                <!-- <div>Boufekrane le:{{obj.facture_date_time}}</div> -->
                                             </div>
                                         </div>													
                                     </div>
@@ -108,7 +108,7 @@
                                                 </td>
 
                                                 <td>
-                                                    {{ article.price.total_a }}
+                                                    {{ article.total_a }}
                                                     
                                                 </td>
 
@@ -120,33 +120,15 @@
                                             
                                             <tr>
                                                 <td></td>
-                                                <td colspan="2">
-                                                    <p>
-                                                        Subtotal<br>
-                                                        Shipment &amp; Handling<br>
-                                                        Tax<br>
-                                                    </p>
-                                                    <h5 class="text-success"><strong>Total</strong></h5>
+                                                <td colspan="3">
+                                                    
+                                                    <h5 class="text-success text-center"><strong>Total TTC </strong></h5>
                                                 </td>			
                                                 <td>
-                                                    <p>
-                                                        {{obj.total}} DH<br>
-                                                        00.00 DH<br>
-                                                        00.00 DH<br>
-                                                    </p>
+                                                   
                                                     <h5 class="text-success"><strong>{{obj.total}} DH</strong></h5>
                                                 </td>
-                                                <td> 
-                                                        PAID:                    
-
-                                                    {% if obj.paid  %}
-
-                                                       
-                                                    <img class="icon" src="{% static 'image/icon-yes.svg' %}" alt="True">
-                                                    {% else %}
-                                                        <img class="icon" src="{% static 'image/icon-no.svg' %}" alt="False">
-                                                    {% endif %}
-                                                </td>
+                                               
                                             </tr>
                                         </tbody>
                                     </table>
