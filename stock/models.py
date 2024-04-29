@@ -16,9 +16,9 @@ from django.utils import timezone
 class Facture(models.Model):
     
      client = models.CharField(max_length=132)
-     facture_date_time = models.DateTimeField(default=timezone.now)
+     facture_date_time = models.DateTimeField(auto_now_add=True)
      save_by = models.ForeignKey(User, on_delete=models.PROTECT )
-     totalAll =  models.DecimalField(max_digits =6 , decimal_places=2)# Exemple avec 10 chiffres au maximum et 2 chiffres après la virgule
+     total =  models.DecimalField(max_digits =10 , decimal_places=2)# Exemple avec 10 chiffres au maximum et 2 chiffres après la virgule
      last_update_date = models.DateTimeField(null = True, blank=True)
      paid = models.BooleanField(default=False)
      # comments= models.TextField(null = True , max_length =1000, blank=True )

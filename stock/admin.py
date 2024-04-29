@@ -6,7 +6,7 @@ class Adminchef(admin.ModelAdmin):
     list_display = ('name' ,'email' , 'phone' ,'password')
 
 class AdminFacture(admin.ModelAdmin):
-    list_display= ('client','facture_date_time','save_by','totalAll','paid')
+    list_display= ('client','facture_date_time','save_by','total','paid')
     
 admin.site.register(Chef,Adminchef)
 admin.site.register(Facture,AdminFacture)
