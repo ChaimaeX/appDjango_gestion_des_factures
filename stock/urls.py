@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import path
 from . import views
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('' ,views.LoginView.as_view() , name='Login'),
     path('Home' ,views.HomeView.as_view() , name='Home'),
@@ -18,3 +18,4 @@ urlpatterns = [
     # path('misAjour', views.misAjour.as_view(), name="misAjour"),
 
 ]
+urlpatterns+=staticfiles_urlpatterns()
