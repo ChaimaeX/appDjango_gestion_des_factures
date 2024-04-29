@@ -29,45 +29,38 @@
     
     						
     
-    					 <!-- Row start -->
-                         <div class="row gutters">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <a href="" class="invoice-logo">
-                                    Chaimae Programmer
-                                </a>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <address class="text-right">
-                                    aharakchaimae1212@gmail.com<br>
-                                   Morroco, Chaimae<br>
-                                    00000 00000
-                                </address>
-                            </div>
-                        </div>
-                        <!-- Row end -->
-
-                       
-                        <!-- Row start -->
-                        <div class="row gutters">
-                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                <div class="invoice-details">
-                                    <address>
-                                        {{obj.client}}<br>
-                                        , Morroco
-                                    </address>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="invoice-details">
-                                    <div class="invoice-num">
-                                        <div>- #00{{obj.id}}</div>
-                                        <div>{{obj.facture_date_time}}</div>
+    					        <!-- Row start -->
+                                <div class="row gutters">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <a href="#" class="invoice-logo text-center">
+                                            Ste Samia Solaire
+                                        </a>
                                     </div>
-                                </div>													
-                            </div>
-                        </div>
-                        <!-- Row end -->
-
+                                    
+                                </div>
+                                <!-- Row end -->
+        
+                               
+                                <!-- Row start -->
+                                <div class="row gutters">
+                                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                                        <div class="invoice-details">
+                                            <address>
+                                              Client:  {{obj.client}}<br>
+                                               
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                        <div class="invoice-details">
+                                            <div class="invoice-num">
+                                                <div>-bl N°: #00{{obj.id}}</div>
+                                                <div>Boufekrane le:{{obj.facture_date_time}}</div>
+                                            </div>
+                                        </div>													
+                                    </div>
+                                </div>
+                                <!-- Row end -->
                     </div>
 
                     <div class="invoice-body">
@@ -81,10 +74,10 @@
                                             <tr>
                                                 
                                                 <th>Product ID</th>
-                                                <th>Items</th>
+                                                <th>Designation</th>
                                                 <th>Quantities</th>
-                                                <th>Unit Price</th>
-                                                <th>Subtotal</th>
+                                                <th>P.U.TTC(DH)</th>
+                                                <th>P.T.TTC(DH)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -115,7 +108,7 @@
                                                 </td>
 
                                                 <td>
-                                                    {{ article.price.get_total }}
+                                                    {{ article.price.total_a }}
                                                     
                                                 </td>
 

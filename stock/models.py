@@ -93,3 +93,4 @@ class FactureProduct(models.Model):
      produit = models.ForeignKey(Produit,on_delete=models.CASCADE)
      quantity_achat = models.IntegerField()
      price_finich = models.DecimalField(max_digits =10, decimal_places=2)
+     total_a = models.DecimalField(max_digits =10, decimal_places=2)

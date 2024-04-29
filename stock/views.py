@@ -254,7 +254,7 @@ class AddFactureView(View):
                       produit =  produit,
                       quantity_achat = qte,
                       price_finich = prix,
-
+                      total_a = total_a,
                     )
                    produit.quantity -= int(qte)
                    produit.save()
