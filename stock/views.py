@@ -338,11 +338,11 @@ class ConsulterStock(View):
         product = Produit.objects.all() 
         # obj = Produit.objects.get(nam)
         for produit in product:
-            if produit.name.lower() == "regelateur" and produit.quantity < 2:
+            if produit.name.lower() == "regelateur" and produit.quantity < 2 and produit.quantity > 0:
                 messages.warning(request,f"la qauntite de {produit.name} presque finie")
-            if produit.name.lower() == "lamp 7w" and produit.quantity < 10:
+            if produit.name.lower() == "lamp 7w" and produit.quantity < 10 and produit.quantity > 0:
                 messages.warning(request,f"la qauntite de {produit.name} presque finie")
-            if produit.category.lower() == "battrie" and produit.quantity < 2:
+            if produit.category.lower() == "battrie" and produit.quantity < 2  and produit.quantity > 0:
                 messages.warning(request,f"la qauntite de {produit.name} presque finie")
             
         self.context['product'] = product
