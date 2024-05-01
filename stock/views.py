@@ -224,7 +224,7 @@ class AddFactureView(View):
          produits = request.POST.getlist('produit')
          qty = request.POST.getlist('qty')
          price = request.POST.getlist('unit')
-         total_a = request.POST.get('total-a')
+         total_a = request.POST.getlist('total-a')
          total = request.POST.get('total')
          paid = request.POST.get('paid')
          product = Produit.objects.all()
@@ -245,7 +245,7 @@ class AddFactureView(View):
                 }
                if cpt == len(produits):
                  facture = Facture.objects.create(**facture_object)
-                 for produit_id, qte, prix in zip(produits, qty , price):
+                 for produit_id, qte, prix, total in zip(produits, qty , price,total_a):
           
                    produit = Produit.objects.get(id=produit_id)
 
@@ -254,9 +254,10 @@ class AddFactureView(View):
                       produit =  produit,
                       quantity_achat = qte,
                       price_finich = prix,
-                      total_a = total_a,
+                      total_a = total,
                     )
                    produit.quantity -= int(qte)
+                   produit.total -= int(qte)*produit.price
                    produit.save()
        
          
@@ -334,12 +335,22 @@ class ConsulterStock(View):
         'product':product
     }
     def get(self, request, *args, **kwargs):
-        product = Produit.objects.all()
+        product = Produit.objects.all() 
+        # obj = Produit.objects.get(nam)
+        for produit in product:
+            if produit.name.lower() == "regelateur" and produit.quantity < 2:
+                messages.warning(request,f"la qauntite de {produit.name} presque finie")
+            if produit.name.lower() == "lamp 7w" and produit.quantity < 10:
+                messages.warning(request,f"la qauntite de {produit.name} presque finie")
+            if produit.category.lower() == "battrie" and produit.quantity < 2:
+                messages.warning(request,f"la qauntite de {produit.name} presque finie")
+            
         self.context['product'] = product
         return render(request, self.template_name,self.context)
     
     def post(self, request, *args, **kwargs):
-      print( request.POST.get('id_sup'))
+      product = Produit.objects.all() 
+       
       if request.POST.get('id_sup'):
         try:
           
@@ -349,6 +360,7 @@ class ConsulterStock(View):
            messages.success(request, _("The deletion was successful."))   
            product = Produit.objects.all()
            self.context['product'] = product
+     
         except Exception as e:
           messages.error(request, f"Sorry, error is : {e}.")  
         
@@ -490,8 +502,9 @@ class upProduit(View):
             obj.save()
             self.context['product'] = obj
             messages.success(request, 'Produit mis à jour avec succès.')
-            
+            return redirect('consulte-Stock')
            
          except Exception as e :
              messages.error(request, 'Une erreur s\'est produite lors de la mise à jour du produit : {}'.format(str(e)))
+         
         return render(request,self.template_name,self.context)

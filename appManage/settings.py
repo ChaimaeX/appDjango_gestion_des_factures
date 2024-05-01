@@ -30,6 +30,7 @@ try:
         messages.INFO:'alert-info',
         messages.SUCCESS: 'alert-success',
         messages.ERROR: 'alert-danger',
+        messages.WARNING: 'alert-warning'
     }
 except Exception as e:
     pass

@@ -15,8 +15,8 @@
            margin: 0;
            padding: 0;
            font: 400 .875rem 'Open Sans', sans-serif;
-           color: #bcd0f7;
-           background-color: #1A233A;
+           color: #000000;
+           background-color: #ffffff;
            position: relative;
            height: 100%;
        }
@@ -30,7 +30,7 @@
            display: inline-block;
            font-size: 1.6rem;
            font-weight: 700;
-           color: #bcd0f7;
+           color: #060708;
        }
 
        .invoice-container .invoice-header .invoice-logo img {
@@ -39,7 +39,7 @@
 
        .invoice-container .invoice-header address {
            font-size: 0.8rem;
-           color: #8a99b5;
+           color: #000000;
            margin: 0;
        }
 
@@ -47,7 +47,7 @@
            margin: 1rem 0 0 0;
            padding: 1rem;
            line-height: 180%;
-           background-color: #1a233a;
+           background-color: #ffffff;
        }
 
        .invoice-container .invoice-details .invoice-num {
@@ -68,7 +68,7 @@
        .invoice-status {
            text-align: center;
            padding: 1rem;
-           background: #272e48;
+           background: #ffffff;
            -webkit-border-radius: 4px;
            -moz-border-radius: 4px;
            border-radius: 4px;
@@ -81,7 +81,7 @@
 
        .invoice-status h5.status-title {
            margin: 0 0 0.8rem 0;
-           color: #8a99b5;
+           color: #000000;
        }
 
        .invoice-status p.status-type {
@@ -112,7 +112,7 @@
        }
 
        .card {
-           background: #272E48;
+           background: #ffffff;
            -webkit-border-radius: 5px;
            -moz-border-radius: 5px;
            border-radius: 5px;
@@ -121,7 +121,7 @@
        }
 
        .custom-table {
-           border: 1px solid #2b3958;
+           border: 1px solid #172033;
        }
 
        .custom-table thead {
@@ -130,24 +130,25 @@
 
        .custom-table thead th {
            border: 0;
-           color: #0b0b0b;
-       }
+           color: #ffffff;
+           letter-spacing: 1px;
+        }
 
        .custom-table>tbody tr:hover {
-           background-color: #172033;
+           background-color: #dfe1cf;
        }
 
        .custom-table>tbody tr:nth-of-type(even) {
-           background-color: #1a243a;
+           background-color: #ffffff;
        }
 
        .custom-table>tbody td {
-           border: 1px solid #2e3d5f;
+           border: 1px solid #1d273f;
        }
 
        .table {
-           background-color: #0b1326;
-           color: #596275;
+           background-color: #ffffff;
+           color: #000000;
            font-size: .75rem;
        }
 
@@ -179,15 +180,13 @@
     <!-- Row start -->
     <div class="row gutters">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-        <a href="\.com" class="invoice-logo">
-            Chaimae Programmer
+        <a href="\.com" class="invoice-logo text-warning">
+          Ste Samia Solaire
         </a>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6">
         <address class="text-right">
-            Chaimae Programmer Inc, 45 NorthWest<br>
-            Morroco, Douala<br>
-            00000 00000
+          
         </address>
     </div>
     </div>
@@ -195,24 +194,25 @@
     
     
     <!-- Row start -->
-    <div class="row gutters">
-    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+<div class="row gutters">
+    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
         <div class="invoice-details">
             <address>
-                {{data.client}}<br>
-                , Morroco
+                Client: {{data.client}}<br>
+                <div>Objet: {{data.desc}}</div>
             </address>
+            
         </div>
     </div>
-    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
         <div class="invoice-details">
-            <div class="invoice-num">
-                <div>- #00</div>
-                <div>{{data.desc}}</div>
+            <div class="invoice-num ">
+                <div> #00</div>
+                
             </div>
         </div>													
     </div>
-    </div>
+    </div> -->
     <!-- Row end -->
     
     </div>
@@ -226,42 +226,36 @@
             <table class="table custom-table m-0">
                 <thead>
                     <tr>
-                        
+                        <th>Id</th>
                         <th>Product </th>
                         <th>Quantities</th>
-                        <th>Unit Price</th>
-                        <th>Subtotal</th>
+                        <th>prix</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                   
-                {% for  produit, prix, quantite, total in zipped %}
-                <tr>
+                    {% for  produit, prix, quantite, total in zipped %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ produit }}</td>
+                      <td>{{ quantite }}</td>
+                      <td>{{ prix }}</td>
+                      <td>{{ total }}</td>
+                    </tr>
+                    {% endfor %} 
                   
-                  <td>{{ produit }}</td>
-                  <td>{{ prix }}</td>
-                  <td>{{ quantite }}</td>
-                  <td>{{ total }}</td>
-                </tr>
-                {% endfor %} 
                     
                     
                     <tr>
+                        
                         <td></td>
-                        <td colspan="2">
-                            <p>
-                                Subtotal<br>
-                                Shipment &amp; Handling<br>
-                                Tax<br>
-                            </p>
-                            <h5 class="text-success"><strong>Total</strong></h5>
+                        <td colspan="3">
+                           
+                            <h5 class="text-success text-center"><strong>Total:</strong></h5>
                         </td>			
                         <td>
-                            <p>
-                                {{data.all}} DH<br>
-                                00.00 DH<br>
-                                00.00 DH<br>
-                            </p>
+                            
                             <h5 class="text-success"><strong>{{data.all}} DH</strong></h5>
                         </td>
                        
