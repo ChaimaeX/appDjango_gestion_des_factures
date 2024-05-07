@@ -30,6 +30,7 @@
             <th scope="col"> Date</th>
             <th scope="col"> Total</th>
             <th scope="col"> Paid</th>
+            <th scope="col"> Type de Facture</th>
             <th scope="col"> Action</th>
             </TR>
         </thead>
@@ -48,7 +49,7 @@
                <img src="{% static 'image/icon-no.svg' %}" alt="False">
                {% endif %}
             </td>
-           
+            <td>{{facture.get_TYPE_display }}</td>
             <td>
                <a href="{% url 'facture' pk=facture.pk  %}" title="Detail" class="badge text-white bg-success m-30">View</a>
 

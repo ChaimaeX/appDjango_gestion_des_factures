@@ -227,6 +227,7 @@ class AddFactureView(View):
          total_a = request.POST.getlist('total-a')
          total = request.POST.get('total')
          paid = request.POST.get('paid')
+         type = request.POST.get('type')
          product = Produit.objects.all()
          print()
          cpt = 0
@@ -241,6 +242,7 @@ class AddFactureView(View):
                     'save_by' :request.user,
                     'total': total,
                     'paid': paid,
+                    'TYPE':type,
                     
                 }
                if cpt == len(produits):

@@ -36,7 +36,7 @@
     <div id="wrapper">
 
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="produit-1">#1 Item name </label>
                 <!-- <input required name="article" type="text" class="form-control" id="article-1"> -->
                  <select name="produit" class="form-control" id="produit">
@@ -52,10 +52,20 @@
                 <input required name="qty" type="number" min="1" step="0.1"  onkeyup="getTotal(this.id)" class="form-control" id="qty-1">
             </div>
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label for="unit-1"> Unit Price </label>
                 <input required name="unit" type="number" min="1" step="0.1"  onkeyup="getTotal(this.id)" class="form-control" id="unit-1">
                
+            </div>
+            <div class="form-group col-md-2">
+                <label for="produit-1">Type </label>
+                <!-- <input required name="article" type="text" class="form-control" id="article-1"> -->
+                 <select name="type" class="form-control" id="type">
+                 <option> Choose a type ... </option>
+                 <option value="F">Facture</option>
+                 <option value="B">Bon de livraison</option>
+              
+            </select>
             </div>
 
            
